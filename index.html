@@ -16,7 +16,7 @@
 <body>
   <div id="app">
     <!-- N A V B A R -->
-    <header class="navbar navbar-light d-flex justify-content-between bd-navbar sticky-top ">
+    <header class="navbar d-flex justify-content-between sticky-top">
 
       <a class="navbar-brand mx-auto" href="#"><img src="./assets/logo.png" alt="logo"></a>
       <div class="p-2 dropdown">
@@ -29,32 +29,21 @@
       </div>
     </header>
 
-    <div class="container-fluid row col-sm-12">
-
-      <!-- F O R M -->
-      <form-component @upload="submitUpload($event)"></form-component>
-
-      <!-- M A I N B O D Y -->
-      <div class="col-sm-6 mt-3">
-        <h1 style="text-align:center"> Uploaded Files </h1>
-        <hr class="my-4">
-        <div class="row">
-          <content-component v-for="content in filtered" :content="content"></content-component>
+    <div class="container" style="margin-top: -256px; padding-top: 256px;">
+      <div class="row flex-container my-4">
+        <sidebar-component @page="changePage($event)"></sidebar-component>
+        <!-- F O R M -->
+        <form-component @upload="submitUpload($event)" v-if="currentPage == 'upload'"></form-component>
+        <!-- M A I N B O D Y -->
+        <div class="col" v-if="currentPage == 'list'">
+        <search-component @search="searchTitle($event)"></search-component>
+          <h1 style="text-align:center"> Uploaded Files </h1>
+          <hr class="my-4">
+          <content-component v-for="content in filtered" :content="content" :key="content._id"></content-component>
         </div>
       </div>
-
-      <!-- R I G H T S I D E B A R -->
-      <div class="col-sm-3 mt-3 overflow-auto sidebars">
-        <h3>Lastest Upload Files</h3>
-        <hr class="my-4">
-        <upload-list v-for="upload in uploads" :upload="upload" class="mb-3"></upload-list>
-      </div>
-
-
     </div>
-    
   </div>
-
 
     <!-- S C R I P T   H E R E  -->
 
@@ -73,7 +62,7 @@
 
     <!-- vue & components -->
     <script src="./assets/components/form.js"></script>
-    <script src="./assets/components/content-components.js"></script>
+    <script src="./assets/components/contents.js"></script>
     <script src="./assets/components/upload-list.js"></script>
     <script src="./assets/components/main.js"></script>
 

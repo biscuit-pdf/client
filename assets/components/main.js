@@ -1,46 +1,66 @@
 let urlServer = `http://localhost:3000`
 
-var app = new Vue ({
-  el :'#app',
-  data : {
-    uploads : [{
-      title: 'a',
-      author: 'b',
-      uploader: 'lutfi'
-    }, {
-      title: 'c',
-      author: 'd',
-      uploader: 'luthfi'
-    }],
-    contents: [],
-    searchKeyword: '',
-    filtered: [{
-      title: 'a',
-      author: 'b',
-      uploader: 'lutfi'
-    }, {
-      title: 'c',
-      author: 'd',
-      uploader: 'luthfi'
-    }, {
-      title: 'a',
-      author: 'b',
-      uploader: 'lutfi'
-    }, {
-      title: 'c',
-      author: 'd',
-      uploader: 'luthfi'
-    }]
-  },
-  created: function(){
-    this.getContents();
-  },
-  computed: {
-    // filtered(){
-    //   return this.contents.filter(content => content.toLowerCase().includes(this.searchKeyword)); 
-    // }
+Vue.component('sidebar-component', {
+  template : `
+  <div class="row"">
+        <nav class="nav flex-column nav-pills">
+            <a class="nav-link" href="#" style="color:orange;" @click="toHome"><i class="fas fa-home fa-2x"></i></a>
+            <a class="nav-link" href="#" style="color:orange;" @click="toList"><i class="fas fa-list fa-2x" style="position:relative; left:2px;"></i></a>
+            <a class="nav-link" href="#" style="color:orange;" @click="toUpload"><i class="fas fa-file-upload fa-2x" style="position:relative; left:4px"></i></a>
+        </nav>
+      </div>
+  `,
+  methods : {
+    toUpload() {
+      this.$emit('page', 'upload')
+    },
+    toHome() {
+      this.$emit('page', 'home')
+    },
+    toList() {
+      this.$emit('page', 'list')
+    }
+  }
+})
+
+Vue.component('search-component', {
+  template : `
+  <div class="col w-75 mx-auto">
+    <form class="mx-2 my-auto d-inline w-100" @submit="searchTitle">
+      <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search" v-model="keyword">
+      <span class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button">Search</button>
+      </span>
+    </div>
+    </form>
+  </div>
+  `,
+  data() {
+    return {
+      keyword : ''
+    }
   },
   methods : {
+    searchTitle() {
+      this.$emit('search', this.keyword)
+    }
+  }
+})
+
+var app = new Vue ({
+  el :'#app',
+  created() {
+    this.getContents()
+  },
+  data : {
+    currentPage : 'home',
+    pdfUrl : '',
+    contents : [],
+    originalContent : []
+  },
+  methods : {
+
     submitUpload(newPost) {
       axios({
         method: 'post',
@@ -49,13 +69,13 @@ var app = new Vue ({
         headers: {'Content-Type' : 'multipart/form-data'}
       })
         .then( response => {
+          this.contents.push(response.data)
+        })
+        .catch( response => {
           console.log(response)
         })
-        .catch( ({response}) => {
-          console.log(response)
-        })
-      // console.log(Object.keys(newPost))
       },
+
       getContents(){
         axios
           .get(`${urlServer}/upload/getfile`)
@@ -65,7 +85,25 @@ var app = new Vue ({
           .catch(response => {
             console.error(response);
           })
-      }
-    }
+      },
 
+      changePage(page) {
+        this.currentPage = page
+      },
+      
+      bookViewer(url) {
+        // this.currentPage = ''
+        this.pdfUrl = url
+      },
+
+      searchTitle(keyword) {
+        this.contents = this.originalContent.filter( content => content.title.toLowerCase().includes(keyword))
+      }
+
+  },
+  computed : {
+    viewPdf() {
+      return this.pdfUrl
+    }
+  }
 })
