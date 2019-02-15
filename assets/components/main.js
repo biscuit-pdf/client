@@ -57,7 +57,7 @@ var app = new Vue ({
     currentPage : 'home',
     pdfUrl : '',
     contents : [],
-    originalContent : []
+    originalContents : []
   },
   methods : {
 
@@ -69,7 +69,9 @@ var app = new Vue ({
         headers: {'Content-Type' : 'multipart/form-data'}
       })
         .then( response => {
-          this.contents.push(response.data)
+          console.log(response.data)
+          this.contents.unshift(response.data)
+          swal('Upload Success')
         })
         .catch( response => {
           console.log(response)
@@ -81,6 +83,7 @@ var app = new Vue ({
           .get(`${urlServer}/upload/getfile`)
           .then(({data}) => {
             this.contents = data;
+            this.originalContents = data
           })
           .catch(response => {
             console.error(response);
@@ -97,13 +100,16 @@ var app = new Vue ({
       },
 
       searchTitle(keyword) {
-        this.contents = this.originalContent.filter( content => content.title.toLowerCase().includes(keyword))
+        this.contents = this.originalContents.filter( content => content.title.toLowerCase().includes(keyword))
       }
 
   },
   computed : {
     viewPdf() {
       return this.pdfUrl
+    },
+    filtered() {
+      return this.contents
     }
   }
 })
