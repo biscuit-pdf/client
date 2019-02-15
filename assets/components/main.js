@@ -63,13 +63,7 @@ var app = new Vue ({
             this.contents = data;
           })
           .catch(response => {
-            Swal.fire({
-              position: 'top-end',
-              type: 'error',
-              title: response,
-              showConfirmButton: false,
-              timer: 500
-            });
+            console.error(response);
           })
       }
     }

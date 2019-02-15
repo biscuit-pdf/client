@@ -1,9 +1,8 @@
 Vue.component('content-component', {
   template : `
-      <div class="col-6 mb-3">
-        <div class="card bg-light mb-3 border-style">
-          <div class="card-header">Header</div>
-          <div class="card-body"> 
+      <div class="col-12 mb-3">
+        <div class="card bg-light mb-3" style="max-height:100%">
+          <div class="card-body" style="font-size:70%"> 
             <table>
               <tr>
                 <td> Title </td> <td> : </td> <td> {{content.title}} </td>
@@ -19,7 +18,6 @@ Vue.component('content-component', {
               </tr>
             </table>
           </div>
-          <div class="card-footer">Footer</div>
         </div>
       </div>
   `,
