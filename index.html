@@ -32,25 +32,23 @@
     <div class="container-fluid row col-sm-12">
 
       <!-- F O R M -->
-<<<<<<< HEAD
       <form-component @upload="submitUpload($event)"></form-component>
-=======
-      <form-component :title="title" :author="author"></form-component>
->>>>>>> home
 
       <!-- M A I N B O D Y -->
       <div class="col-sm-6 mt-3">
         <h1> main body goes here </h1>
+        <content-component v-for="content in filtered" :content="content"></content-component>
       </div>
 
       <!-- R I G H T S I D E B A R -->
-      <div class="col-sm-3 mt-3">
+      <div class="col-sm-3 mt-3 overflow-auto sidebars">
         <h3>side bar goes here</h3>
-        
+        <upload-list v-for="upload in uploads" :upload="upload" class="mb-3"></upload-list>
       </div>
 
 
     </div>
+    
   </div>
 
 
@@ -66,11 +64,17 @@
 
     <!-- helpers -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     <!-- vue & components -->
+<<<<<<< HEAD
     <script src="./assets/components/form.js"></script>
+=======
+    <script src="./assets/components/content-components.js"></script>
+    <script src="./assets/components/upload-list.js"></script>
+>>>>>>> add bar
     <script src="./assets/components/main.js"></script>
 
 </body>
