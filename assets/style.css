@@ -33,3 +33,8 @@
   top: 12%;
   overflow-y: scroll;
 }
+
+.border-style {
+  border-color: grey;
+  border-radius: 20px;
+}

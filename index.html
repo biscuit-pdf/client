@@ -36,13 +36,17 @@
 
       <!-- M A I N B O D Y -->
       <div class="col-sm-6 mt-3">
-        <h1> main body goes here </h1>
-        <content-component v-for="content in filtered" :content="content"></content-component>
+        <h1 style="text-align:center"> Uploaded Files </h1>
+        <hr class="my-4">
+        <div class="row">
+          <content-component v-for="content in filtered" :content="content"></content-component>
+        </div>
       </div>
 
       <!-- R I G H T S I D E B A R -->
       <div class="col-sm-3 mt-3 overflow-auto sidebars">
-        <h3>side bar goes here</h3>
+        <h3>Lastest Upload Files</h3>
+        <hr class="my-4">
         <upload-list v-for="upload in uploads" :upload="upload" class="mb-3"></upload-list>
       </div>
 
@@ -69,12 +73,9 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     <!-- vue & components -->
-<<<<<<< HEAD
     <script src="./assets/components/form.js"></script>
-=======
     <script src="./assets/components/content-components.js"></script>
     <script src="./assets/components/upload-list.js"></script>
->>>>>>> add bar
     <script src="./assets/components/main.js"></script>
 
 </body>

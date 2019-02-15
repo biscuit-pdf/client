@@ -1,17 +1,16 @@
 Vue.component('upload-list', {
   template : `
-    <div class="card">
-      <img class="card-img-top" :src="upload.imageUrl" alt="Card image cap" style="width: 18rem">
+    <div class="card bg-light mb-3 border-style">
       <div class="card-body"> 
         <table>
           <tr>
-            <td> Title </td> <td>:</td> <td> {{upload.title}} </td>
+            <td> <small>Title</small> </td> <td><small> : </small></td> <td> <small>{{upload.title}}</small> </td>
           <tr>
           <tr>
-            <td> Author </td> <td>:</td> <td> {{upload.author}} </td>
+            <td> <small>Author</small> </td> <td><small> : </small></td> <td> <small>{{upload.author}}</small> </td>
           </tr>
           <tr>
-            <td> Uploader </td> <td>:</td> <td> {{upload.uploader}} </td>
+            <td> <small>Uploader</small> </td> <td><small> : </small></td> <td> <small>{{upload.uploader}}</small> </td>
           </tr>
         </table>
       </div>

@@ -13,15 +13,32 @@ var app = new Vue ({
       uploader: 'luthfi'
     }],
     contents: [],
-    searchKeyword: ''
+    searchKeyword: '',
+    filtered: [{
+      title: 'a',
+      author: 'b',
+      uploader: 'lutfi'
+    }, {
+      title: 'c',
+      author: 'd',
+      uploader: 'luthfi'
+    }, {
+      title: 'a',
+      author: 'b',
+      uploader: 'lutfi'
+    }, {
+      title: 'c',
+      author: 'd',
+      uploader: 'luthfi'
+    }]
   },
   created: function(){
-    this.getContentComponent();
+    this.getContents();
   },
   computed: {
-    filtered(){
-      return this.contents.filter(content => content.toLowerCase().includes(this.searchKeyword)); 
-    }
+    // filtered(){
+    //   return this.contents.filter(content => content.toLowerCase().includes(this.searchKeyword)); 
+    // }
   },
   methods : {
     submitUpload(newPost) {
@@ -41,7 +58,7 @@ var app = new Vue ({
       },
       getContents(){
         axios
-          .get(`${url}/upload/getfile`)
+          .get(`${urlServer}/upload/getfile`)
           .then(({data}) => {
             this.contents = data;
           })
