@@ -3,10 +3,45 @@ let urlServer = `http://localhost:3000`
 var app = new Vue ({
   el :'#app',
   data : {
+    uploads : [{
+      title: 'a',
+      author: 'b',
+      uploader: 'lutfi'
+    }, {
+      title: 'c',
+      author: 'd',
+      uploader: 'luthfi'
+    }],
+    contents: [],
+    searchKeyword: '',
+    filtered: [{
+      title: 'a',
+      author: 'b',
+      uploader: 'lutfi'
+    }, {
+      title: 'c',
+      author: 'd',
+      uploader: 'luthfi'
+    }, {
+      title: 'a',
+      author: 'b',
+      uploader: 'lutfi'
+    }, {
+      title: 'c',
+      author: 'd',
+      uploader: 'luthfi'
+    }]
+  },
+  created: function(){
+    this.getContents();
+  },
+  computed: {
+    // filtered(){
+    //   return this.contents.filter(content => content.toLowerCase().includes(this.searchKeyword)); 
+    // }
   },
   methods : {
     submitUpload(newPost) {
-      
       axios({
         method: 'post',
         url: urlServer + '/upload',
@@ -20,6 +55,17 @@ var app = new Vue ({
           console.log(response)
         })
       // console.log(Object.keys(newPost))
+      },
+      getContents(){
+        axios
+          .get(`${urlServer}/upload/getfile`)
+          .then(({data}) => {
+            this.contents = data;
+          })
+          .catch(response => {
+            console.error(response);
+          })
+      }
     }
-  }
+
 })
