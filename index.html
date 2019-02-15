@@ -32,26 +32,7 @@
     <div class="container-fluid row col-sm-12">
 
       <!-- F O R M -->
-      <div class="my-5 col-sm-3 mt-3">
-        <img class="mx-auto d-block pr-1" src="./assets/upload.gif">
-        <!-- <h5 class="text-center mb-2 text-info"><u><strong>upload your file here</u></strong></h5> -->
-        <div class="form-group mx-auto mt-2" style="width: 200px">
-          Book Title :
-          <input type="text" name="" placeholder="input book title here ..">
-        </div>
-        <div class="form-group mx-auto" style="width: 200px">
-          Author Name :
-          <input type="text" name="" placeholder="input author name here ..">
-        </div>
-        <div class="mx-auto" style="width: 200px">
-          <span class="btn btn-file btn-success btn-sm btn-block mb-1">
-              Browse <input type="file">
-          </span>
-          <button class="btn-block btn-primary mx-auto text-small p-1 align-middle" type="submit" style="border-radius: 2px">
-            <small> Upload </small>
-          </button>
-        </div>
-      </div>
+      <form-component @upload="submitUpload($event)"></form-component>
 
       <!-- M A I N B O D Y -->
       <div class="col-sm-6 mt-3">
@@ -66,6 +47,7 @@
 
 
     </div>
+  </div>
 
 
     <!-- S C R I P T   H E R E  -->
@@ -81,12 +63,12 @@
     <!-- helpers -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     <!-- vue & components -->
+    <script src="./assets/components/form.js"></script>
     <script src="./assets/components/main.js"></script>
 
-  </div>
 </body>
 
 </html>
