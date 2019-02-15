@@ -1,12 +1,10 @@
 Vue.component('form-component', {
   template : `
-  <div class="my-5 col-sm-3 mt-3">
+  <div class="my-5">
       <div class="form-group mx-auto mt-2" style="width: 200px">
-        <!-- Book Title : -->
         <input class="form-control" type="text" placeholder="input book title here .." v-model="title">
       </div>
       <div class="form-group mx-auto" style="width: 200px">
-      <!-- Author Name : -->
         <input class="form-control" type="text" name="" placeholder="input author name here .." v-model="author">
       </div>
       <div class="mx-auto" style="width: 200px">
